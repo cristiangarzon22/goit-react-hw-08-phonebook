@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 axios.defaults.baseURL = "https://connections-api.herokuapp.com/users/signup";
-
+///////revisado
 export const fetchContacts = createAsyncThunk(
  "contacts/GetContacts",
   async (token, thunkAPI) => {
@@ -13,20 +13,26 @@ export const fetchContacts = createAsyncThunk(
         },
       });
       console.log(response);
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+////////
 
+////////revisado
 export const addContact = createAsyncThunk(
   "Contacts/createContact",
-  async (Contact, thunkAPI) => {
+  async ({ token, transaction }, thunkAPI) => {
     try {
-      const response = await axios.post(`/contacts`, Contact, {
+      const response = await axios.post(`/contacts`, transaction, {
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -42,7 +48,7 @@ export const addContact = createAsyncThunk(
     }
   }
 );
-
+////////
 
 export const deleteTask = createAsyncThunk(
   "Contacts/delete",
@@ -52,6 +58,48 @@ export const deleteTask = createAsyncThunk(
       return taskId;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+/// revisado
+export const register = createAsyncThunk(
+  'auth/register',
+  async (credentials, thunkAPI) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+
+      const response = await axios.post(`/users/signup`, credentials, config);
+
+      if (response.status !== 200) {
+        throw new Error(response.data.message);
+      }
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+//////
+
+
+export const login = createAsyncThunk(
+  'auth/login',
+  async (credentials, thunkAPI) => {
+    try {
+      const response = await axios.post(`/users/login`, credentials);
+
+      if (response.status !== 200) {
+        throw new Error(response.data.message);
+      }
+
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );

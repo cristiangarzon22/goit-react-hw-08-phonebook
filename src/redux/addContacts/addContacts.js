@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {fetchTasks,addTask,deleteTask} from "../operations";
+import {fetchContacts,deleteTask,register, addContact, login} from "../operations";
 export const contactsSlice = createSlice({
   name: 'contacts',
   initialState: {
@@ -16,31 +16,75 @@ export const contactsSlice = createSlice({
     filterContacts(state, action) {
       state.filter = action.payload;
     },
+    setFormError(state, { payload }) {
+      state.formError = payload;
+    },
+    clearFormError(state) {
+      state.formError = null;
+    },
+    clearError(state) {
+      state.error = null;
+    },
+    userLogout(state) {
+      state.users = { firstName: null, lastName: null, email: null };
+      state.token = null;
+      state.isLoggedIn = false;
+    },
   },
   extraReducers:{
-    [fetchTasks.pending](state) {
+    [fetchContacts.pending](state) {
       state.isLoading = true;
     },
-    [fetchTasks.fulfilled](state, action) {
+    [register.pending](state){
+      state.isLoading = true;
+    },
+    [login.pending](state){
+      state.isLoading = true;
+    },
+    [fetchContacts.fulfilled](state, action) {
       state.isLoading = false;
       state.error = null;
       state.items = action.payload;
     },
-    [fetchTasks.rejected](state, action) {
+    [register.fulfilled](state,{payload}){
+      const { firstName, lastName, email } = payload.user;
+      state.user = { firstName, lastName, email };
+      state.token = payload.accessToken;
+      state.isLoggedIn = true;
+      state.isLoading = false;
+      state.error = null;
+    },
+    [login.fulfilled](state,{payload}){
+      const { firstName, lastName, email } = payload.user;
+      state.user = { firstName, lastName, email };
+      state.token = payload.accessToken;
+      state.isLoggedIn = true;
+      state.error = null;
+      state.isLoading = false;
+    },
+    [login.rejected](state, action){
       state.isLoading = false;
       state.error = action.payload;
     },
-    [addTask.pending](state) {
+    [fetchContacts.rejected](state, action) {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [register.rejected](state,action) {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+    [addContact.pending](state) {
       state.isLoading = true;
     },
-    [addTask.fulfilled](state, { payload }) {
+    [addContact.fulfilled](state, { payload }) {
       state.isLoading = false;
       state.error = null;
       state.token = payload.accessToken;
       state.isLoggedIn = true;
       state.users.push(payload);
     },
-    [addTask.rejected](state, { payload }) {
+    [addContact.rejected](state, { payload }) {
       state.isLoading = false;
       state.error = payload;
     },
@@ -59,6 +103,6 @@ export const contactsSlice = createSlice({
   },
 });
 
-export const { filterContacts } = contactsSlice.actions;
+export const { filterContacts,setFormError, clearFormError, clearError, userLogout } = contactsSlice.actions;
 const contactReducer = contactsSlice.reducer;
 export default contactReducer;
