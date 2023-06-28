@@ -5,7 +5,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import { RestrictedRoute } from "./RestrictedRoute";
 import { useDispatch, useSelector } from "react-redux";
 import { refreshUser } from "redux/operations";
-
+//m
 const Home = lazy(() => import("./pages/Home"));
 const Register = lazy(() => import("./pages/register"));
 const Login = lazy(() => import("./pages/login"));
@@ -63,6 +63,7 @@ export const App = () => {
             <PrivateRoute redirectTo="/" component={<CreateContact />} />
           }
         />
+        
       </Route>
     </Routes>
   );

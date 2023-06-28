@@ -7,7 +7,7 @@ function Contacts() {
   const dispatch = useDispatch();
   const { isLoading, items } = useSelector((state) => state.contacts);
   const { token } = useSelector((state) => state.contacts);
-
+//k
   useEffect(() => {
     dispatch(fetchContacts(token));
   }, [token, dispatch]);
