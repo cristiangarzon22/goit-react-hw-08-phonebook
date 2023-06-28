@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-//import { userLogout } from "../../redux/auth/slice";
+import { userLogout } from "redux/addContacts/addContacts";
 
 const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  //const { isLoggedIn } = useSelector((state) => state.auth);
+  const { isLoggedIn } = useSelector((state) => state.contacts);
 
   const handleLogout = () => {
-    //dispatch(userLogout());
-    //navigate("/");
+    dispatch(userLogout());
+    navigate("/");
   };
   return (
     <header
@@ -38,7 +38,7 @@ const NavBar = () => {
         >
           <h2>
             <NavLink
-              //to={isLoggedIn ? "/transactions" : "/"}
+              to={isLoggedIn ? "/Contacts" : "/"}
               style={{ textDecoration: "none", color: "unset" }}
             >
               My new app
@@ -52,7 +52,7 @@ const NavBar = () => {
             
               <h3>
                 <NavLink
-                  //to="/register"
+                  to="/Register"
                   style={{ textDecoration: "none", color: "unset" }}
                 >
                   Register
@@ -60,7 +60,7 @@ const NavBar = () => {
               </h3>
               <h3>
                 <NavLink
-                  //to="/login"
+                  to="/Login"
                   style={{ textDecoration: "none", color: "unset" }}
                 >
                   Login
