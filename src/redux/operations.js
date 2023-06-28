@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 axios.defaults.baseURL = "https://connections-api.herokuapp.com/users/signup";
-///////revisado
+
 export const fetchContacts = createAsyncThunk(
  "contacts/GetContacts",
   async (token, thunkAPI) => {
@@ -14,7 +14,7 @@ export const fetchContacts = createAsyncThunk(
       });
       console.log(response);
       if (!response.ok) {
-        throw new Error(data.message);
+        throw new Error(response.data.message);
       }
       return response.data;
     } catch (error) {
@@ -22,9 +22,7 @@ export const fetchContacts = createAsyncThunk(
     }
   }
 );
-////////
 
-////////revisado
 export const addContact = createAsyncThunk(
   "Contacts/createContact",
   async ({ token, transaction }, thunkAPI) => {
@@ -48,7 +46,7 @@ export const addContact = createAsyncThunk(
     }
   }
 );
-////////
+
 
 export const deleteTask = createAsyncThunk(
   "Contacts/delete",
@@ -61,7 +59,7 @@ export const deleteTask = createAsyncThunk(
     }
   }
 );
-/// revisado
+
 export const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
@@ -84,7 +82,6 @@ export const register = createAsyncThunk(
     }
   }
 );
-//////
 
 
 export const login = createAsyncThunk(
@@ -100,6 +97,30 @@ export const login = createAsyncThunk(
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+
+export const refreshUser = createAsyncThunk(
+  "auth/refreshUser",
+  async (token, thunkAPI) => {
+    try {
+      const response = await fetch(`/account`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message);
+      }
+
+      return data;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error.message);
     }
   }
 );

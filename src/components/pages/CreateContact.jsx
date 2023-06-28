@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { addContact } from '../redux/operations';
 import { Report } from 'notiflix/build/notiflix-report-aio';
-import css from '../form_css/form.module.css';
+
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
 import {
@@ -117,27 +116,27 @@ const Bar = () => {
   return (
     /////
     <>
-        <form onSubmit={handleSubmit} className={css.form}>
-        <h3 className={css.title}>Add Contact</h3>
+        <form onSubmit={handleSubmit} >
+        <h3 >Add Contact</h3>
         <input
-          className={css.int}
+          
           type="text"
           placeholder="Name"
-          value={text}
+          value={name}
           onChange={handleNameChange}
           autoComplete="on"
         />
         <input
-          className={css.int}
+          
           type="text"
           placeholder="Number"
-          value={completed}
+          value={number}
           onChange={handleNumberChange}
           autoComplete="on"
           pattern="\d*"
         />
-        {showWarning && <div className={css.warning}>Solo se permiten números</div>}
-        <button className={css.btn} type="submit" disabled={isLoading}>
+        {showWarning && <div >Solo se permiten números</div>}
+        <button  type="submit" disabled={isLoading}>
         {isLoading ? "Loading..." : "Send"}
         </button>
       </form>

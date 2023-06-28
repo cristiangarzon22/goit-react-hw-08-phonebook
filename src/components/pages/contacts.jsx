@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { fetchContacts } from "redux/operations";
 
-function Transactions() {
+function Contacts() {
   const dispatch = useDispatch();
   const { isLoading, items } = useSelector((state) => state.contacts);
   const { token } = useSelector((state) => state.contacts);
@@ -49,4 +49,4 @@ function Transactions() {
   );
 }
 
-export default Transactions;
+export default Contacts;

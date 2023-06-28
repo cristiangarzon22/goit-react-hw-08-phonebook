@@ -30,6 +30,9 @@ export const contactsSlice = createSlice({
       state.token = null;
       state.isLoggedIn = false;
     },
+    clearMessage(state) {
+      state.message = null;
+    },
   },
   extraReducers:{
     [fetchContacts.pending](state) {
@@ -103,6 +106,6 @@ export const contactsSlice = createSlice({
   },
 });
 
-export const { filterContacts,setFormError, clearFormError, clearError, userLogout } = contactsSlice.actions;
+export const { filterContacts, setFormError, clearMessage, clearFormError, clearError, userLogout } = contactsSlice.actions;
 const contactReducer = contactsSlice.reducer;
 export default contactReducer;
