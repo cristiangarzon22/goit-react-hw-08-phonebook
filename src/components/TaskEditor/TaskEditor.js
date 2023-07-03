@@ -9,8 +9,14 @@ export const TaskEditor = () => {
     e.preventDefault();
     const form = e.currentTarget;
     const text = form.elements.text.value;
-    if (text !== '') {
-      dispatch(addTask(text));
+    const number = form.elements.number.value;
+    if (text !== '' && number !== '') {
+      dispatch(addTask(
+        {
+          name:text,
+          number:number
+        }
+      ));
       form.reset();
       return;
     }
@@ -20,6 +26,7 @@ export const TaskEditor = () => {
   return (
     <form  onSubmit={handleSubmit}>
       <input name="text" />
+      <input name="number" />
       <button type="submit" >
         Add task
       </button>
