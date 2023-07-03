@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { addTask } from 'redux/task/operations';
-
+import Tasks from 'pages/Task';
 
 export const TaskEditor = () => {
   const dispatch = useDispatch();
@@ -8,14 +8,11 @@ export const TaskEditor = () => {
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
-    const text = form.elements.text.value;
+    const name = form.elements.text.value;
     const number = form.elements.number.value;
-    if (text !== '' && number !== '') {
+    if (name !== '' && number !== '') {
       dispatch(addTask(
-        {
-          name:text,
-          number:number
-        }
+        { name, number }
       ));
       form.reset();
       return;
@@ -24,12 +21,15 @@ export const TaskEditor = () => {
   };
 
   return (
+    <>
     <form  onSubmit={handleSubmit}>
-      <input name="text" />
+      <input name="text" /> 
       <input name="number" />
       <button type="submit" >
         Add task
       </button>
     </form>
+    <Tasks/>
+    </>
   );
 };
