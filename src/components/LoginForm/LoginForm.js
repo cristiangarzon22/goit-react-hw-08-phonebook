@@ -10,7 +10,10 @@ export const FormLogin = () => {
       email: e.target.elements['email'].value,
       password: e.target.elements['password'].value,
     };
-    dispatch(logIn(usuario));
+    dispatch(logIn({
+      email: e.target.elements['email'].value,
+      password: e.target.elements['password'].value,
+    }));
     console.log(usuario);
   
   };
