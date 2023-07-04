@@ -13,8 +13,7 @@ export const FormRegister = () => {
       password: e.target.elements['email'].value,
     }
     ));
-    ///console.log(object);
-   // object.reset(); ////
+    
   };
 
   return (

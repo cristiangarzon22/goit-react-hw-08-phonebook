@@ -1,17 +1,17 @@
 import { useDispatch } from 'react-redux';
-import { addTask } from 'redux/task/operations';
-import Tasks from 'pages/Task';
+import { addContacts } from 'redux/contacts/operations';
+import ContactLists from 'pages/Contacts';
 
-export const TaskEditor = () => {
-  const dispatch = useDispatch();
+export const ContactEditor = () => {
+  const Dispatch = useDispatch();
 
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
     const name = form.elements.text.value;
     const number = form.elements.number.value;
-    if (name !== '' && number !== '') {
-      dispatch(addTask(
+    if (name !== '' && number !== '') { 
+      Dispatch(addContacts(
         { name, number }
       ));
       form.reset();
@@ -29,7 +29,7 @@ export const TaskEditor = () => {
         Add task
       </button>
     </form>
-    <Tasks/>
+    <ContactLists/>
     </>
   );
 };

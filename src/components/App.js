@@ -4,9 +4,9 @@ import { Register } from "pages/Register";
 import { Route, Routes } from 'react-router-dom';
 import { NavigationBar } from "./Layout";
 import { PrivateRoute } from './PrivateRoute';
-import { RestrictedRoute } from './RestrictedRoute';
+import { RestrictedRoute } from './RestrictedRoute';  
 
-import Tasks from "pages/Task";
+import ContactLists from "pages/Contacts";
 
 export const App = () => {
     return(
@@ -14,21 +14,21 @@ export const App = () => {
         <Route path="/" element={<NavigationBar />}>
           <Route path="/" element={<Home />} />
           <Route
-          path="/register"
+          path="register"
           element={
-            <RestrictedRoute redirectTo="/tasks" component={<Register />} />
+            <RestrictedRoute redirectTo="/ContactLists" component={<Register />} />
           }
         />
           <Route
-          path="/logIn"
+          path="logIn"
           element={
-            <RestrictedRoute redirectTo="/tasks" component={<Login />} />
+            <RestrictedRoute redirectTo="/ContactLists" component={<Login />} />
           }
         />
         <Route
-          path="/tasks"
+          path="ContactLists"
           element={
-            <PrivateRoute redirectTo="/login" component={<Tasks />} />
+            <PrivateRoute redirectTo="/login" component={<ContactLists />} />
           }
         />
         </Route>

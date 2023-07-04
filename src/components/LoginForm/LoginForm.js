@@ -6,13 +6,13 @@ export const FormLogin = () => {
     const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    const object = {
+    const usuario = {
       email: e.target.elements['email'].value,
       password: e.target.elements['password'].value,
     };
-    dispatch(logIn(object));
-    console.log(object);
-    ///object.reset(); /////
+    dispatch(logIn(usuario));
+    console.log(usuario);
+  
   };
 
   return (

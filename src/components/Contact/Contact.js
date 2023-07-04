@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux';
-import { deleteTask } from 'redux/task/operations';
+import { deleteContact } from 'redux/contacts/operations';
 
 
-export const Task = ({ id, text }) => {
+export const Contacts = ({ id, text }) => {
   const dispatch = useDispatch();
-  const handleDelete = () => dispatch(deleteTask(id));
+  const handleDelete = () => dispatch(deleteContact(id));
 
   return (
     <div >

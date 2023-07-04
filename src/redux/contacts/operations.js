@@ -3,9 +3,9 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
-// GET @ /tasks
-export const fetchTasks = createAsyncThunk(
-  'tasks/fetchAll',
+
+export const fetchContacts = createAsyncThunk(
+  'contacts/fetchContacts',
   async (_, thunkAPI) => {
     try {
       const res = await axios.get('/contacts');
@@ -16,9 +16,9 @@ export const fetchTasks = createAsyncThunk(
   }
 );
 
-// POST @ /tasks
-export const addTask = createAsyncThunk(
-  'tasks/addTask',
+
+export const addContacts = createAsyncThunk(
+  'contacts/addContacts',
   async ({ name, number }, thunkAPI) => {
     try {
       const response = await axios.post('/contacts',  { name, number });
@@ -29,12 +29,12 @@ export const addTask = createAsyncThunk(
   }
 );
 
-// DELETE @ /tasks/:id
-export const deleteTask = createAsyncThunk(
-  'tasks/deleteTask',
-  async (taskId, thunkAPI) => {
+
+export const deleteContact = createAsyncThunk(
+  'contacts/deleteContact',
+  async (contactId, thunkAPI) => {
     try {
-      const response = await axios.delete(`/contacts/${taskId}`);
+      const response = await axios.delete(`/contacts/${contactId}`);////
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
