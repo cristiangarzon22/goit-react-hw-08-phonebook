@@ -3,7 +3,7 @@ import { Contacts } from '../Contact/Contact';
 import { SelectAllContacts } from 'redux/contacts/selectors';
 
 
-export const ContactList = () => {
+export const ContactList = () => { 
   const contact = useSelector(SelectAllContacts);
 
   return (

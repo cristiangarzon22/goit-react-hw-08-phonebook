@@ -1,10 +1,14 @@
 import { NavLink } from 'react-router-dom';
-import { useAuth } from 'hooks';
+import { useSelector } from 'react-redux';
+import { selectIsLoggedIn } from '../redux/auth/selectors';
+
+//import { useAuth } from 'hooks';
 
 
 export const Navigation = () => {
-  const { isLoggedIn } = useAuth();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
+ 
   return (
     <nav>
       <NavLink  to="/">
